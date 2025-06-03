@@ -1,4 +1,8 @@
-﻿class Aresta
+﻿using System;
+using System.IO;
+using System.Collections.Generic;
+
+class Aresta
 {
     public int Inicio;
     public int Fim;
@@ -17,11 +21,18 @@
 }
 class Grafo
 {
-    int quantVertices;
-    int quantArestas;
+    public int quantVertices;
+    public int quantArestas;
+    public double DensidadeGrafo = 0;
 
     public double[,] matrizAdjacencia;
     public List<Aresta>;
+
+    public double CalcDensidade(int quantVertices, int quantArestas)
+    {
+        DensidadeGrafo = quantArestas/ (quantVertices * (quantVertices - 1));
+        return DensidadeGrafo;
+    }
 }
 internal class Program
 {
