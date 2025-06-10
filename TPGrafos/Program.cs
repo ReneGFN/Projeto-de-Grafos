@@ -26,18 +26,63 @@ class Grafo
     public double DensidadeGrafo = 0;
 
     public double[,] matrizAdjacencia;
-    public List<Aresta>;
+    public List<Aresta> Arestas = new List<Aresta>();
+    public Grafo(int quantVertices, int quantArestas)
+    {
+        this.quantVertices = quantVertices;
+        this.quantArestas = quantArestas;
+    }
 
-    public double CalcDensidade(int quantVertices, int quantArestas)
+    public double CalcDensidade()
     {
         DensidadeGrafo = quantArestas/ (quantVertices * (quantVertices - 1));
         return DensidadeGrafo;
     }
+    public void ImprimirMatrizAdjacencia()
+    {
+
+    }
+    public void ImprimirListaAdjacencia()
+    {
+
+    }
 }
 internal class Program
 {
+    static void Cabecalho()
+    {
+        Console.Clear();
+        Console.WriteLine("Representação de um Grafo");
+        Console.WriteLine("=============");
+    }
     private static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        double op = 0;
+        int vertices = 0;
+        int arestas = 0;
+
+        Cabecalho();
+        Console.WriteLine("Digite o número de vértices: ");
+        vertices = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Digite o número de arestas: ");
+        arestas = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Digite o peso de cada aresta no seguinte formato separado por espaço: {Inicio Fim Peso}");
+
+
+        Grafo grafo = new Grafo(vertices, arestas);
+
+        op = grafo.CalcDensidade();
+        if (op < 0.5)
+        {
+            Console.WriteLine("Representando por meio de uma Lista de Adjacencia: ");
+            grafo.ImprimirListaAdjacencia();
+        }
+        else
+        {
+            Console.WriteLine("Representando por meio de uma Matriz de Adjacencia: ");
+            grafo.ImprimirMatrizAdjacencia();
+        }
     }
 }
