@@ -21,13 +21,13 @@ class Aresta
 }
 class Grafo
 {
-    public int quantVertices;
-    public int quantArestas;
-    public double DensidadeGrafo = 0;
+    public double quantVertices;
+    public double quantArestas;
+    public double DensidadeGrafo;
 
     public double[,] matrizAdjacencia;
-    public List<Aresta> Arestas = new List<Aresta>();
-    public Grafo(int quantVertices, int quantArestas)
+    public List<Aresta> ListaArestas = new List<Aresta>();
+    public Grafo(double quantVertices, double quantArestas)
     {
         this.quantVertices = quantVertices;
         this.quantArestas = quantArestas;
@@ -35,7 +35,8 @@ class Grafo
 
     public double CalcDensidade()
     {
-        DensidadeGrafo = quantArestas/ (quantVertices * (quantVertices - 1));
+        double DensidadeGrafo = quantArestas / (quantVertices * (quantVertices - 1));
+
         return DensidadeGrafo;
     }
     public void ImprimirMatrizAdjacencia()
@@ -57,9 +58,9 @@ internal class Program
     }
     private static void Main(string[] args)
     {
-        double op = 0;
-        int vertices = 0;
-        int arestas = 0;
+        double densidade;
+        double vertices = 0;
+        double arestas = 0;
 
         Cabecalho();
         Console.WriteLine("Digite o número de vértices: ");
@@ -68,13 +69,21 @@ internal class Program
         Console.WriteLine("Digite o número de arestas: ");
         arestas = int.Parse(Console.ReadLine());
 
-        Console.WriteLine("Digite o peso de cada aresta no seguinte formato separado por espaço: {Inicio Fim Peso}");
-
-
         Grafo grafo = new Grafo(vertices, arestas);
 
-        op = grafo.CalcDensidade();
-        if (op < 0.5)
+        for (int i = 0; i < grafo.quantArestas; i++)
+        {
+            Console.WriteLine("Digite o peso de cada aresta no seguinte formato separado por espaço: {Inicio,Fim,Peso}"); ;
+            string[] partes = Console.ReadLine().Split(',');
+            int inicio = int.Parse(partes[0]);
+            int fim = int.Parse(partes[1]);
+            double peso = double.Parse(partes[2]);
+
+            grafo.ListaArestas.Add(new Aresta(inicio, fim, peso));
+        }
+
+        densidade = grafo.CalcDensidade();
+        if (densidade < 0.5)
         {
             Console.WriteLine("Representando por meio de uma Lista de Adjacencia: ");
             grafo.ImprimirListaAdjacencia();
