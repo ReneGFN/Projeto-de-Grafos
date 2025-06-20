@@ -109,17 +109,16 @@ internal class Program
         int arestas = 0;
 
         Cabecalho();
-        Console.WriteLine("Digite o número de vértices: ");
-        vertices = int.Parse(Console.ReadLine());
-
-        Console.WriteLine("Digite o número de arestas: ");
-        arestas = int.Parse(Console.ReadLine());
+        Console.WriteLine("Digite o número de vértices e arestas: ");
+        string[] VertArestas = Console.ReadLine().Split(' ');
+        vertices = int.Parse(VertArestas[0]);
+        arestas = int.Parse(VertArestas[1]);
 
         Grafo grafo = new Grafo(vertices, arestas);
         for (int i = 0; i < grafo.quantArestas; i++)
         {
-            Console.WriteLine("Digite cada aresta no formato: Inicio,Fim,Peso");
-            string[] partes = Console.ReadLine().Split(',');
+            Console.WriteLine("Digite cada aresta no formato com um espaço entre: Inicio Fim Peso");
+            string[] partes = Console.ReadLine().Split(' ');
             int inicio = int.Parse(partes[0]);
             int fim = int.Parse(partes[1]);
             double peso = double.Parse(partes[2]);
